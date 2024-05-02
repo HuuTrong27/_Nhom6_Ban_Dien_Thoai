@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\User;
-use App\Models\Commet;
+use App\Models\Comment;
 
 Route::group(['prefix' => 'panel', 'namespace' => 'admin'], function() {
 	Route::get('login','LoginController@getLogin')->name('getLogin');
