@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Commet;
+use App\Models\Comment;
 use App\Models\Slide;
 use App\Models\Bill;
 use App\Models\Bill_detail;
@@ -39,7 +39,7 @@ class PageController extends Controller
 
     public function getChitiet(Request $req,$id){
         $sanpham = Product::where('id',$req->id)->first();
-        $data=Commet::where('id_com',$id)->get();
+        $data=Comment::where('id_com',$id)->get();
         $sp_tuongtu = Product::where('idcat',$sanpham->id_type)->paginate(6);
     	return view('users.page.chitiet_sanpham',compact('sanpham','sp_tuongtu','data'));
     }
@@ -47,7 +47,7 @@ class PageController extends Controller
 
     public function postComment(Request $request,$id)
     {
-       $comment=new Commet;
+       $comment=new Comment;
        $comment->name=$request->name;
        $comment->email=$request->email;
        $comment->content=$request->content;
