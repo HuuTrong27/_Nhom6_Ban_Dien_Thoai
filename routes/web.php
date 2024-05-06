@@ -19,7 +19,7 @@ Route::group(['middleware' => 'CheckAdminLogin','prefix' => 'panel'], function()
     Route::get('/', function() {$sanpham=Product::all();
         $loaisanpham=Category::all();
         $taikhoan=User::all();
-        $comment=Commet::all();
+        $comment=Comment::all();
     return view('admin.home.index',compact('sanpham','loaisanpham','taikhoan','comment'));})->name('welcome');
 
 });
