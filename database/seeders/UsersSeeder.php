@@ -22,6 +22,7 @@ class UsersSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin'),
             'level' => 0,
+            'trangthai' => 'active',
         ]);
     }
 }
