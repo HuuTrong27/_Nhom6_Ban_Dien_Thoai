@@ -21,8 +21,8 @@ class CheckAdminLogin
         if (Auth::check())
         {
             $user = Auth::user();
-            // nếu level =1 (admin), status = 1 (actived) thì cho qua.
-            if ($user->trangthai == "active" )
+            // nếu level = 1 (admin), status = 1 (actived) thì cho qua.
+            if ($user->level == 0)
             {
                 return $next($request);
             }

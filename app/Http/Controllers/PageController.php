@@ -66,15 +66,26 @@ class PageController extends Controller
     public function getGioHang(){
         return view('users.page.giohang');
     }
+    public function getLogin()
+    {
+        return view('users.page.dangnhap');
+    }
 
-    public function getAddtoCart(Request $req,$id){
+    public function getAddtoCart(Request $req, $id){
+        // Kiểm tra xem người dùng đã đăng nhập hay chưa
+        if (!Auth::check()) {
+            // Nếu chưa đăng nhập, chuyển hướng người dùng đến trang đăng nhập
+            return redirect()->route('login')->with('error', 'Vui lòng đăng nhập trước khi thêm sản phẩm vào giỏ hàng.');
+        }
+
+        // Người dùng đã đăng nhập, tiếp tục thêm sản phẩm vào giỏ hàng
         $product = Product::find($id);
-        $oldCart = Session('cart')?Session::get('cart'):null;
+        $oldCart = Session('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($product, $id);
-        $req->session()->put('cart',$cart);
+        $req->session()->put('cart', $cart);
         return redirect()->back();
-    }
+    } 
 
 
     public function getDelItemCart($id){
@@ -95,53 +106,77 @@ class PageController extends Controller
     }
 
 
+//Đặt hàng, xem đơn hàng
+public function postCheckout(Request $req) {
+    // Lấy giỏ hàng từ session
+    $cart = Session::get('cart');
 
-    public function postCheckout(Request $req){
-        $cart = Session::get('cart');
+    // Kiểm tra nếu không có sản phẩm trong giỏ hàng
+    if (!$cart || $cart->totalQty === 0) {
+        return redirect()->back()->with('error', 'Không có sản phẩm trong giỏ hàng.');
+    }
+
+    // Lấy email của người dùng đang đăng nhập
+    $loggedInUserEmail = Auth::user()->email;
+
+    // Kiểm tra nếu email nhập vào không giống với email của tài khoản đăng nhập
+    if ($req->email !== $loggedInUserEmail) {
+        return redirect()->back()->with('error', 'Email không đúng!!!.');
+    }
+
+    // Kiểm tra xem khách hàng có tồn tại trong cơ sở dữ liệu hay không
+    $existingCustomer = Customer::where('email', $req->email)->first();
+
+    if ($existingCustomer) {
+        // Nếu khách hàng đã tồn tại, có thể cập nhật thông tin
+        $customer = $existingCustomer;
+    } else {
+        // Nếu không, tạo một khách hàng mới
         $customer = new Customer;
-        $customer->name = $req->name;
-        $customer->gender = $req->gender;
         $customer->email = $req->email;
-        $customer->address = $req->address;
-        $customer->phone_number = $req->phone;
-        $customer->note = $req->notes;
-        $customer->save();
-
-        $bill = new Bill;
-        $bill->id_customer = $customer->id;
-        $bill->date_order = date('Y-m-d');
-        $bill->total = $cart->totalPrice;
-        $bill->payment = $req->payment_method;
-        $bill->note = $req->notes;
-        $bill->save();
-
-        foreach ($cart->items as $key => $value) {
-            $bill_detail = new Bill_detail;
-            $bill_detail->id_bill = $bill->id;
-            $bill_detail->id_products = $key;
-            $bill_detail->quantity = $value['qty'];
-            $bill_detail->price = ($value['price']/$value['qty']);
-            $bill_detail->save();
-        }
-        Session::forget('cart');
-        return redirect()->back()->with('thongbao','Đặt hàng thành công');
-
     }
 
-    public function getLogin(){
-        return view('users.page.dangnhap');
-    }
-    public function getSignin(){
-        return view('users.page.dangky');
+    // Cập nhật hoặc gán thông tin cho khách hàng
+    $customer->name = $req->name;
+    $customer->gender = $req->gender;
+    $customer->address = $req->address;
+    $customer->phone_number = $req->phone;
+    $customer->note = $req->notes;
+    $customer->save();
+
+    // Tạo hóa đơn
+    $bill = new Bill;
+    $bill->id_customer = $customer->id;
+    $bill->date_order = now(); // lấy thời gian hiện tại 
+    $bill->total = $cart->totalPrice;
+    $bill->payment = $req->payment_method;
+    $bill->note = $req->notes;
+    $bill->save();
+
+    // Tạo chi tiết hóa đơn
+    foreach ($cart->items as $key => $value) {
+        $bill_detail = new Bill_detail;
+        $bill_detail->id_bill = $bill->id;
+        $bill_detail->id_products = $key;
+        $bill_detail->quantity = $value['qty'];
+        $bill_detail->price = ($value['price'] / $value['qty']);
+        $bill_detail->save();
     }
 
-    public function getSearch(Request $request){
-        $product=Product::where('name','like','%'.$request->key.'%')
-       ->orWhere('price',$request->key)->get();
-        return view('users.page.search',compact('product'));
+    // Xóa giỏ hàng sau khi đã đặt hàng thành công
+    Session::forget('cart');
 
-    }
+    return redirect()->back()->with('thongbao', 'Đặt hàng thành công');
+}
 
+
+//Tìm kiếm
+public function getSearch(Request $request){
+    $product=Product::where('name','like','%'.$request->key.'%')
+   ->orWhere('price',$request->key)->get();
+    return view('users.page.search',compact('product'));
+
+}
     public function postSignin(Request $req){
         $this->validate($req,
             [   'diachi'=>'required',
@@ -164,6 +199,7 @@ class PageController extends Controller
         $user->password = Hash::make($req->password);
         $user->dienthoai = $req->dienthoai;
         $user->diachi = $req->diachi;
+        $user->level = 1; // Đặt mức mặc định là 1
         $user->save();
         return redirect()->back()->with('thanhcong','Tạo tài khoản thành công');
     }
@@ -182,14 +218,42 @@ class PageController extends Controller
 
     }
     public function postLogout(){
+        // Xóa giỏ hàng khỏi session
+        Session::forget('cart');
+        
+        // Đăng xuất người dùng
         Auth::logout();
+        
+        // Chuyển hướng về trang chủ
         return redirect()->route('trang-chu');
     }
+    
 
+    // public function getDonHang()
+    // {
+    //     $donhang =Customer::all();
+    //     $hd=Bill_detail::all();
+    //     return view('users.page.donhang',compact('donhang','hd'));
+    // }
     public function getDonHang()
-    {
-        $donhang =Customer::all();
-        $hd=Bill_detail::all();
-        return view('users.page.donhang',compact('donhang','hd'));
+{
+    // Xác thực người dùng đã đăng nhập
+    if (Auth::check()) {
+        // Lấy ID của người dùng hiện tại
+        $userId = Auth::id();
+
+        // Lấy danh sách đơn hàng của người dùng hiện tại
+        $donhang = Customer::where('id', $userId)->get();
+
+        // Lấy chi tiết đơn hàng
+        $billDetails = Bill_detail::all();
+
+        // Hiển thị trang với danh sách đơn hàng
+        return view('users.page.donhang', compact('donhang', 'billDetails'));
+    } else {
+        // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
+        return redirect()->route('login');
     }
+}
+
 }

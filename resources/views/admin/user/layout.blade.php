@@ -59,14 +59,14 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Quản Lý Sản Phẩm</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-puzzle-piece"></i><a href="{{route('category.index')}}">Danh Mục Sản Phẩm</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="{{route('product.index')}}">Sản Phầm</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="{{route('product.index')}}">Sản Phẩm</a></li>
 
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Quản Tài Khoản</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="glyphicon glyphicon-user "></i><a href="{{route('user.index')}}"">Tài Khoản Của Tôi</a></li>
+                            <li><i class="glyphicon glyphicon-user "></i><a href="{{route('user.index')}}">Tài Khoản Của Tôi</a></li>
                             <li><i class="glyphicon glyphicon-user"></i><a href="tables-data.html">Tất Cả Tài Khoản</a></li>
                             <li><i class="glyphicon glyphicon-user "></i><a href="tables-data.html">Phân Quyền</a></li>
                         </ul>

@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('level')->default(0);
-            $table->text('trangthai');
+            $table->integer('level')->default(1);
+            $table->string('trangthai')->default('active');
             $table->string('loaitaikhoan')->default('basic');
             $table->string('diachi')->nullable();
             $table->string('dienthoai')->nullable();
@@ -38,5 +38,8 @@ return new class extends Migration
     public function down()
     {
         //
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('level');
+        });
     }
 };

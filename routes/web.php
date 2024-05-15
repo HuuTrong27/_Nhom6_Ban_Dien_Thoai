@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Comment;
 
 Route::group(['prefix' => 'panel', 'namespace' => 'admin'], function() {
-	Route::get('login','LoginController@getLogin')->name('getLogin');
+	 Route::get('login','LoginController@getLogin')->name('getLogin');
 	Route::post('login','LoginController@postLogin')->name('postLogin');
     Route::get('logout','LoginController@getLogout')->name('getLogout');
     Route::get('register','LoginController@getDangKy')->name('getdangky');

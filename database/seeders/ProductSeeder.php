@@ -30,7 +30,7 @@ class ProductSeeder extends Seeder
             <p>Dung Lượng 128gB</p>
             
             <p>IOS 14</p>',
-            'idcat' => 14, 
+            'idcat' => 1, 
             ],
             [
                 'name' => 'Iphone 7 Plus',
@@ -44,7 +44,7 @@ class ProductSeeder extends Seeder
                 'content' => '<p>Ram 3GB</p>
 
                 <p>Dung Lượng 64GB</p>',
-                'idcat' => 14, 
+                'idcat' => 1, 
             ],
             [
                 'name' => 'Iphone 6Plus',
@@ -56,7 +56,7 @@ class ProductSeeder extends Seeder
                 'new' => 1,
                 'trangthai' => 'Còn hàng',
                 'content' => '<p>Ram 2GB</p>',
-                'idcat' => 14, 
+                'idcat' => 1, 
             ],
             [
                 'name' => 'Sam Sung J7 Pro',
@@ -68,7 +68,7 @@ class ProductSeeder extends Seeder
                 'new' => 1,
                 'trangthai' => 'Còn hàng',
                 'content' => '<p>Ram 3GB</p>',
-                'idcat' => 15, 
+                'idcat' => 2, 
             ],
             [
                 'name' => 'Sam sung J7 Prime',
@@ -80,7 +80,7 @@ class ProductSeeder extends Seeder
                 'new' => 1,
                 'trangthai' => 'Còn hàng',
                 'content' => '<p>Ram 4GB</p>',
-                'idcat' => 15, 
+                'idcat' => 2, 
             ],
             [
                 'name' => 'OPPO A12',
@@ -94,7 +94,7 @@ class ProductSeeder extends Seeder
                 'content' => '<p>Ram 8GB</p>
 
                 <p>DL 64GB</p>',
-                'idcat' => 16, 
+                'idcat' => 3, 
             ],
             [
                 'name' => 'OPPO A5',
@@ -106,7 +106,7 @@ class ProductSeeder extends Seeder
                 'new' => 1,
                 'trangthai' => 'Còn hàng',
                 'content' => '<p>Ram 4GB</p>',
-                'idcat' => 16, 
+                'idcat' => 3, 
             ],
             [
                 'name' => 'APPLE WATCH 005X',
@@ -118,7 +118,7 @@ class ProductSeeder extends Seeder
                 'new' => 1,
                 'trangthai' => 'Còn hàng',
                 'content' => '<p>M&agrave;n H&igrave;nh 2In</p>',
-                'idcat' => 18, 
+                'idcat' => 5, 
             ],
             [
                 'name' => 'SONY XA',
@@ -130,7 +130,7 @@ class ProductSeeder extends Seeder
                 'new' => 0,
                 'trangthai' => 'Còn hàng',
                 'content' => '<p>Ram 2GB</p>',
-                'idcat' => 19, 
+                'idcat' => 6, 
             ],
             [
                 'name' => 'Dell 007X',
@@ -144,7 +144,7 @@ class ProductSeeder extends Seeder
                 'content' => '<p>Ram 8GB</p>
 
                 <p>SSD 240</p>',
-                'idcat' => 20, 
+                'idcat' => 7, 
             ],
             [
                 'name' => 'XiaoMi',
@@ -156,7 +156,7 @@ class ProductSeeder extends Seeder
                 'new' => 0,
                 'trangthai' => 'Còn hàng',
                 'content' => '<p>Ram 2GB</p>',
-                'idcat' => 17, 
+                'idcat' => 4, 
             ],
             [
                 'name' => 'Sam Sung A50',
@@ -170,7 +170,7 @@ class ProductSeeder extends Seeder
                 'content' => '<p>Ram 4GB</p>
 
                 <p>&nbsp;</p>',
-                'idcat' => 15, 
+                'idcat' => 2, 
             ],
             [
                 'name' => 'Iphone 5S',
@@ -183,7 +183,7 @@ class ProductSeeder extends Seeder
                 'trangthai' => 'Còn hàng',
                 'content' => '<p>Ram 1GB</p>
                 <p>&nbsp;</p>',
-                'idcat' => 14, 
+                'idcat' => 1, 
             ],
             [
                 'name' => 'Sam SUng J7 PRIME',
@@ -197,7 +197,7 @@ class ProductSeeder extends Seeder
                 'content' => '<p>Ram 3GB</p>
 
                 <p>Dung lượng 64GB</p>',
-                'idcat' => 15, 
+                'idcat' => 2, 
             ],
             [
                 'name' => 'Sony 5',
@@ -211,7 +211,7 @@ class ProductSeeder extends Seeder
                 'content' => '<p>Ram 4GB</p>
 
                 <p>Dung Lượng 32GB</p>',
-                'idcat' => 19, 
+                'idcat' => 6, 
             ],
             [
                 'name' => 'OPPO A37',
@@ -225,7 +225,7 @@ class ProductSeeder extends Seeder
                 'content' => '<p>Ram 2GB</p>
 
                 <p>Dung Lượng 8GB</p>',
-                'idcat' => 16, 
+                'idcat' => 3, 
             ],
             [
                 'name' => 'MapBook PRO',
@@ -239,7 +239,7 @@ class ProductSeeder extends Seeder
                 'content' => '<p>Ram 16GB</p>
 
                 <p>&nbsp;</p>',
-                'idcat' => 20, 
+                'idcat' => 7, 
             ],
             [
                 'name' => 'HP 009X',
@@ -255,7 +255,7 @@ class ProductSeeder extends Seeder
                 <p>SSD 240GB</p>
                 
                 <p>Core i7</p>',
-                'idcat' => 20, 
+                'idcat' => 7, 
             ],
  
             // Thêm các bản ghi khác nếu cần

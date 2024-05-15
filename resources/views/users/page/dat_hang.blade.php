@@ -19,6 +19,12 @@
 
     <form action="{{route('dathang')}}" method="post" class="beta-form-checkout">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
+        
+        <!-- Hiển thị thông báo lỗi -->
+        @if(Session::has('error'))
+            <div class="alert alert-danger">{{ Session::get('error') }}</div>
+        @endif
+
         <div class="row" style="color: blue">@if(Session::has('thongbao')){{Session::get('thongbao')}}@endif</div>
         <div class="row">
             <div class="col-sm-6">
@@ -33,19 +39,17 @@
                     <label>Giới tính </label>
                     <input id="gender" type="radio" class="input-radio" name="gender" value="nam" checked="checked" style="width: 10%"><span style="margin-right: 10%">Nam</span>
                     <input id="gender" type="radio" class="input-radio" name="gender" value="nữ" style="width: 10%"><span>Nữ</span>
-
                 </div>
 
                 <div class="form-block">
                     <label for="email">Email*</label>
-                    <input type="email" id="email" name="email" required placeholder="expample@gmail.com">
+                    <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" required placeholder="expample@gmail.com">
                 </div>
 
                 <div class="form-block">
                     <label for="adress">Địa chỉ*</label>
                     <input type="text" id="address" name="address" placeholder="Street Address" required>
                 </div>
-
 
                 <div class="form-block">
                     <label for="phone">Điện thoại*</label>
@@ -65,7 +69,7 @@
                             <div>
                             @if(Session::has('cart'))
                             @foreach($product_cart as $cart)
-                            <!--  one item	 -->
+                            <!--  one item -->
                                 <div class="media">
                                     <img width="25%" src="images/{{$cart['item']['image']}}" alt="" class="pull-left">
                                     <div class="media-body">
@@ -108,7 +112,6 @@
                                     <br>- Ngân hàng AG, Chi nhánh TPHCM
                                 </div>
                             </li>
-
                         </ul>
                     </div>
 

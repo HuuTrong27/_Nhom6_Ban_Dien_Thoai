@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Commet;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Session;
 
@@ -17,7 +17,7 @@ class BinhLuanController extends Controller
     }
     public function index()
     {
-        $binhluan = Commet::all();
+        $binhluan = Comment::all();
         return view($this->viewprefix.'index', compact('binhluan'));
     }
 
@@ -43,18 +43,18 @@ class BinhLuanController extends Controller
 
     }
 
-    public function show(Commet $binhluan)
+    public function show(Comment $binhluan)
     {
         //
 
     }
 
-    public function edit(Commet $binhluan)
+    public function edit(Comment $binhluan)
     {
         return view($this->viewprefix.'edit')->with('binhluan', $binhluan);
     }
 
-    public function update(Request $request, Commet $binhluan)
+    public function update(Request $request, Comment $binhluan)
     {
         $data=$request->validate([
             'name' => 'required',
@@ -73,7 +73,7 @@ class BinhLuanController extends Controller
     }
 
 
-    public function destroy(Commet $binhluan)
+    public function destroy(Comment $binhluan)
     {
         if($binhluan->delete())
             Session::flash('message', 'successfully!');

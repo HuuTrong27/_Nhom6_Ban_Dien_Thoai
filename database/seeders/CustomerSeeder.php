@@ -19,7 +19,7 @@ class CustomerSeeder extends Seeder
         $data = [
             [
             'name' => 'Trần Văn Lợi',
-            'gender' => 'male',
+            'gender' => 'Nam',
             'email' => 'admin@gmail.com',
             'address' => 'Bình Định',
             'phone_number' => '0923511567',

@@ -17,12 +17,12 @@ return new class extends Migration
         Schema::create('customer', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('gender', ['male', 'female', 'other'])->nullable();
+            $table->string('gender')->nullable();
             $table->string('email')->unique();
             $table->string('address')->nullable();
             $table->string('phone_number')->nullable();
             $table->text('note')->nullable();
-            $table->timestamps();
+            $table->timestamps(0);
         });
     }
 
