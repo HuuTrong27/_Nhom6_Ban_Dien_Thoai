@@ -70,7 +70,7 @@ class PageController extends Controller
     {
         return view('users.page.dangnhap');
     }
-    public function getSingin(){
+    public function getSignin(){
         return view('users.page.dangky');
     }
 
