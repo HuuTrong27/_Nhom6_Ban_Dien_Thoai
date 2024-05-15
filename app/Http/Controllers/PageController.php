@@ -70,6 +70,9 @@ class PageController extends Controller
     {
         return view('users.page.dangnhap');
     }
+    public function getSingin(){
+        return view('users.page.dangky');
+    }
 
     public function getAddtoCart(Request $req, $id){
         // Kiểm tra xem người dùng đã đăng nhập hay chưa
