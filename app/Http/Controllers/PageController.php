@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
 use Session;
+use Illuminate\Support\Facades\Log;
 
 class PageController extends Controller
 {
@@ -70,12 +71,8 @@ class PageController extends Controller
     {
         return view('users.page.dangnhap');
     }
-<<<<<<< HEAD
-    public function getSignin()
-    {
-=======
     public function getSignin(){
->>>>>>> 821a12a52975cca96a4a34c7cb7d331241be48d1
+
         return view('users.page.dangky');
     }
 
@@ -88,8 +85,12 @@ class PageController extends Controller
 
         // Người dùng đã đăng nhập, tiếp tục thêm sản phẩm vào giỏ hàng
         $product = Product::find($id);
+       
         $oldCart = Session('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
+        Log::info('Sản phẩm được thêm vào giỏ hàng:', ['product_id' => $product->id, 'product_name' => $product->name]);
+
+       
         $cart->add($product, $id);
         $req->session()->put('cart', $cart);
         return redirect()->back();
