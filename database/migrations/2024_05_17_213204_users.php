@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('verification_code')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('level')->default(1);
@@ -26,7 +27,8 @@ return new class extends Migration
             $table->string('diachi')->nullable();
             $table->string('dienthoai')->nullable();
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('created_at')->default(now());
+            $table->timestamp('updated_at')->default(now());
         });
     }
 

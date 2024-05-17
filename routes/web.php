@@ -6,7 +6,8 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Comment;
-
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controller\ResetPasswordController;
 Route::group(['prefix' => 'panel', 'namespace' => 'admin'], function() {
 	 Route::get('login','LoginController@getLogin')->name('getLogin');
 	Route::post('login','LoginController@postLogin')->name('postLogin');
@@ -81,3 +82,17 @@ Route::post('dang-ki','PageController@postSignin')->name('signin');
 Route::get('dang-xuat','PageController@postLogout')->name('logout');
 Route::get('search','PageController@getSearch')->name('search');
 Route::get('donhang','PageController@getDonHang')->name('donhang');
+
+
+
+//Lấy lại mật khẩu bằng email
+Route::get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('/password_reset/', 'ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('/password/reset', 'ResetPasswordController@reset')->name('password.update');
+
+
+
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+

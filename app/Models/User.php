@@ -24,7 +24,8 @@ class User extends Authenticatable
         'password',
         'phone',
         'diachi',
-        'trangthai'
+        'trangthai',
+        'verìication_code'
 
     ];
 

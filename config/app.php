@@ -69,7 +69,7 @@ return [
     |
     */
 // Lấy thời gian thực
-    // 'timezone' => 'UTC',
+    //'timezone' => 'UTC',
     'timezone' => 'Asia/Ho_Chi_Minh',
 
     /*
@@ -212,5 +212,6 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
-
+ 
+    
 ];

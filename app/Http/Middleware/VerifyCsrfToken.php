@@ -13,5 +13,8 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
+        'send-otp',
+        'verify-otp',
+        'reset-password',
     ];
 }

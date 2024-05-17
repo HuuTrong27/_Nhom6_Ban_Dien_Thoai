@@ -32,17 +32,30 @@ return [
     |            "postmark", "log", "array", "failover"
     |
     */
+    'mail' => [
+        'driver' => env('MAIL_MAILER', 'smtp'),
+        'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+        'port' => env('MAIL_PORT', 587),
+        'username' => env('MAIL_USERNAME'),
+        'password' => env('MAIL_PASSWORD'),
+        'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+        'from' => [
+            'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+            'name' => env('MAIL_FROM_NAME', env('APP_NAME')),
+        ],
+    ],
+    
 
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
-            'local_domain' => env('MAIL_EHLO_DOMAIN'),
+            'auth_mode' => null,
         ],
 
         'ses' => [

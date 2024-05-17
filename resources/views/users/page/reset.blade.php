@@ -1,14 +1,14 @@
 @extends('users.layout')
-@section('title','Đăng Nhập')
+@section('title', 'Đặt lại mật khẩu')
 @section('content')
 <div class="inner-header">
     <div class="container">
         <div class="pull-left">
-            <h6 class="inner-title">Đăng nhập</h6>
+            <h6 class="inner-title">Đặt lại mật khẩu</h6>
         </div>
         <div class="pull-right">
             <div class="beta-breadcrumb">
-                <a href="index.html">Home</a> / <span>Đăng nhập</span>
+                <a href="index.html">Home</a> / <span>Đặt lại mật khẩu</span>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -26,45 +26,35 @@
                     @endforeach
                 </ul>
                 @endif
-
-                @if (session('status'))
-                <ul>
-                    <li class="text-danger"> {{ session('status') }}</li>
-                </ul>
-                @endif
-
-                @if (Session::has('error'))
-                <div class="alert alert-danger">
-                    {{ Session::get('error') }}
-                </div>
-                @endif
             </div>
 
-            <form action="{{ route('login') }}" method="post" class="beta-form-checkout">
+            <form action="{{ route('password.update') }}" method="post" class="beta-form-checkout">
                 {{ csrf_field() }}
                 <div class="col-sm-3"></div>
 
                 <div class="col-sm-6">
-                    <h4>Đăng nhập</h4>
+                    <h4>Đặt lại mật khẩu</h4>
                     <div class="space20">&nbsp;</div>
+                    
+                    <input type="hidden" name="email" value="{{ $email }}">
                     <div class="form-block">
-                        <label for="email">Email address*</label>
-                        <input type="email" name="email" required>
+                        <label for="verification_code">Verification Code:</label>
+                        <input type="text" name="verification_code" required>
                     </div>
                     <div class="form-block">
-                        <label for="password">Password*</label>
+                        <label for="password">Mật khẩu mới*</label>
                         <input type="password" name="password" required>
                     </div>
                     <div class="form-block">
-                        <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+                        <label for="password_confirmation">Xác nhận mật khẩu mới*</label>
+                        <input type="password" name="password_confirmation" required>
                     </div>
                     <div class="form-block">
-                        <a href="{{ route('password.request') }}" class="btn btn-link">Quên mật khẩu?</a>
+                        <button type="submit" class="btn btn-primary">Đặt lại mật khẩu</button>
                     </div>
                 </div>
                 <div class="col-sm-3"></div>
-        </div>
-        </form>
-    </div> <!-- #content -->
-</div> <!-- .container -->
+            </form>
+        </div> <!-- #content -->
+    </div> <!-- .container -->
 @endsection
