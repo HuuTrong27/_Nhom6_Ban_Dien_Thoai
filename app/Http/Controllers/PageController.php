@@ -70,8 +70,12 @@ class PageController extends Controller
     {
         return view('users.page.dangnhap');
     }
+<<<<<<< HEAD
     public function getSignin()
     {
+=======
+    public function getSignin(){
+>>>>>>> 821a12a52975cca96a4a34c7cb7d331241be48d1
         return view('users.page.dangky');
     }
 
