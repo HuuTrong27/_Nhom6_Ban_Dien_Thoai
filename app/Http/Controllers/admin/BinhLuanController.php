@@ -17,7 +17,7 @@ class BinhLuanController extends Controller
     }
     public function index()
     {
-        $binhluan = Comment::all();
+        $binhluan = Comment::paginate(5);
         return view($this->viewprefix.'index', compact('binhluan'));
     }
 

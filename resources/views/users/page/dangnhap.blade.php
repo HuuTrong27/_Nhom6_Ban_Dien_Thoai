@@ -8,7 +8,7 @@
         </div>
         <div class="pull-right">
             <div class="beta-breadcrumb">
-                <a href="index.html">Home</a> / <span>Đăng nhập</span>
+                <a href="{{ route('trang-chu') }}">Home</a> / <span>Đăng nhập</span>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -51,9 +51,12 @@
                         <label for="email">Email address*</label>
                         <input type="email" name="email" required>
                     </div>
-                    <div class="form-block">
+                    <div class="form-block position-relative">
                         <label for="password">Password*</label>
-                        <input type="password" name="password" required>
+                        <input type="password" name="password" id="password" required class="form-control">
+                        <span class="eye-icon" id="toggle-password">
+                            <i class="fas fa-eye" id="eye-icon"></i>
+                        </span>
                     </div>
                     <div class="form-block">
                         <button type="submit" class="btn btn-primary">Đăng Nhập</button>
@@ -67,4 +70,36 @@
         </form>
     </div> <!-- #content -->
 </div> <!-- .container -->
+
+<style>
+    .position-relative {
+        position: relative;
+    }
+    .eye-icon {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+    .form-control {
+        padding-right: 30px; /* Đảm bảo có đủ không gian cho biểu tượng con mắt */
+    }
+</style>
+
+<script>
+document.getElementById('toggle-password').addEventListener('click', function () {
+    var passwordField = document.getElementById('password');
+    var eyeIcon = document.getElementById('eye-icon');
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+    } else {
+        passwordField.type = 'password';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+    }
+});
+</script>
 @endsection

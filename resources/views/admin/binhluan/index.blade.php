@@ -27,4 +27,19 @@
       @endforeach
   </tbody>
 </table>
+<!-- Phân trang  -->
+<div class="pagination justify-content-center">
+    @if ($binhluan->previousPageUrl())
+        <a href="{{ $binhluan->previousPageUrl() }}" class="btn btn-primary">&laquo; Previous</a>
+    @endif
+
+    @foreach ($binhluan->getUrlRange(1, $binhluan->lastPage()) as $page => $url)
+        <a href="{{ $url }}" class="btn btn-primary {{ $binhluan->currentPage() == $page ? 'active' : '' }}">{{ $page }}</a>
+    @endforeach
+
+    @if ($binhluan->nextPageUrl())
+        <a href="{{ $binhluan->nextPageUrl() }}" class="btn btn-primary">Next &raquo;</a>
+    @endif
+</div>
+
 @stop

@@ -1,6 +1,6 @@
 @extends('admin.theme.layout')
 @section('content')
-<form action="{{route("product.update", $product->id)}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('product.update', $product->id)}}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
    <div class="form-group">
@@ -18,8 +18,14 @@
    </div>
    <div class="form-group">
     <label for="image">Image:</label>
-    <input type="file" class="form-control"name="image" value="{{$product->images}}" />
-  </div>
+    <input type="hidden" name="old_image" value="{{$product->image}}">
+    <input type="file" class="form-control" name="image" value="{{$product->images}}" />
+    @if ($product->image)
+        <img src="{{ asset('images/'. $product->image) }}" width="100" />
+    @endif
+    
+</div>
+
    <div class="form-group">
     <label for="price">Price:</label>
     <input type="text" class="form-control"name="price" value="{{$product->price}}">

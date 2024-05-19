@@ -33,17 +33,17 @@
 
                 <div class="form-block">
                     <label for="name">Họ tên*</label>
-                    <input type="text" name="name" placeholder="Họ tên" required>
+                    <input type="text" name="name" placeholder="Họ tên" required value="{{ Auth::user()->name }}"readonly>
                 </div>
                 <div class="form-block">
                     <label>Giới tính </label>
-                    <input id="gender" type="radio" class="input-radio" name="gender" value="nam" checked="checked" style="width: 10%"><span style="margin-right: 10%">Nam</span>
-                    <input id="gender" type="radio" class="input-radio" name="gender" value="nữ" style="width: 10%"><span>Nữ</span>
+                    <input id="gender" type="radio" class="input-radio" name="gender" value="Nam" checked="checked" style="width: 10%"><span style="margin-right: 10%">Nam</span>
+                    <input id="gender" type="radio" class="input-radio" name="gender" value="Nữ" style="width: 10%"><span>Nữ</span>
                 </div>
 
                 <div class="form-block">
                     <label for="email">Email*</label>
-                    <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" required placeholder="expample@gmail.com">
+                    <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" required placeholder="expample@gmail.com" readonly>
                 </div>
 
                 <div class="form-block">

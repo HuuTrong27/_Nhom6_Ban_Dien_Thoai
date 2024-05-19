@@ -9,9 +9,10 @@ class Bill extends Model
 {
     use HasFactory;
     protected $table = "bills";
-
+   
+    
     public function bill_detail(){
-    	return $this->hasMany('App\BillDetail','id_bill','id');
+    	return $this->hasMany(Bill_detail::Class,'id_bill','id');
     }
 
     public function bill(){

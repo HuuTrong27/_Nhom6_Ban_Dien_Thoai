@@ -44,4 +44,18 @@
       @endforeach
   </tbody>
 </table>
+<!-- Phân trang  -->
+<div class="pagination justify-content-center">
+    @if ($cate->previousPageUrl())
+        <a href="{{ $cate->previousPageUrl() }}" class="btn btn-primary">&laquo; Previous</a>
+    @endif
+
+    @foreach ($cate->getUrlRange(1, $cate->lastPage()) as $page => $url)
+        <a href="{{ $url }}" class="btn btn-primary {{ $cate->currentPage() == $page ? 'active' : '' }}">{{ $page }}</a>
+    @endforeach
+
+    @if ($cate->nextPageUrl())
+        <a href="{{ $cate->nextPageUrl() }}" class="btn btn-primary">Next &raquo;</a>
+    @endif
+</div>
 @stop

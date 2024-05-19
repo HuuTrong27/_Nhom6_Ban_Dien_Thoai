@@ -151,6 +151,7 @@ public function postCheckout(Request $req) {
     $customer->address = $req->address;
     $customer->phone_number = $req->phone;
     $customer->note = $req->notes;
+    $customer->user_id = Auth::id();
     $customer->save();
 
     // Tạo hóa đơn
@@ -252,13 +253,13 @@ public function getSearch(Request $request){
         $userId = Auth::id();
 
         // Lấy danh sách đơn hàng của người dùng hiện tại
-        $donhang = Customer::where('id', $userId)->get();
-
+        //  $donhang = Customer::where('id', $userId)->get();
+          $donhang = Customer::with('bill.bill_detail.product:id,name,price')->where('user_id', $userId)->get();
         // Lấy chi tiết đơn hàng
-        $billDetails = Bill_detail::all();
+          //$hd=Bill_detail::all();
 
         // Hiển thị trang với danh sách đơn hàng
-        return view('users.page.donhang', compact('donhang', 'billDetails'));
+        return view('users.page.donhang', compact('donhang'));
     } else {
         // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
         return redirect()->route('login');
