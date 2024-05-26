@@ -42,7 +42,7 @@ class ForgotPasswordController extends Controller
         );
     
         Mail::send('users.page.reset_password', ['verificationCode' => $verificationCode, 'user'  => $user], function ($message) use ($user) {
-            $message->to($user->email)->subject('Đặt lại mật khẩu');
+            $message->from('nguyenhuutrongvtabs@gmail.com', '_Nhom_6_Ban_ĐT')->to($user->email)->subject('Đặt lại mật khẩu');
         });
     
         Log::info('Password reset verification code: ' . $verificationCode);

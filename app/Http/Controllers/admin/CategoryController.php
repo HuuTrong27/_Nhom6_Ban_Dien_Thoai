@@ -24,7 +24,7 @@ class CategoryController extends Controller
     }
     public function index()
     {
-        $categorys = Category::all();
+        $categorys = Category::paginate(5);
         return view($this->viewprefix.'index')->with('cate', $categorys);
     }
 
@@ -87,20 +87,35 @@ class CategoryController extends Controller
         return view($this->viewprefix.'edit')->with('category', $category);
         // return view($this->viewprefix.'edit',compact('product'));
     }
-    public function update(Request $request, Category $Category)
+    public function update(Request $request, Category $category)
     {
-        $data=$request->validate([
+        // Validate form data
+        $data = $request->validate([
             'name' => 'required',
             'description' => 'required',
             'content' => 'required',
         ]);
-        $data['image'] = $this->imageUpload($request);
-        if($Category->update($data))
+    
+        // Kiểm tra xem có hình ảnh mới được tải lên không
+        if ($request->hasFile('image')) {
+            // Xử lý tải lên hình ảnh mới và lưu vào thư mục lưu trữ
+            $data['image'] = $this->imageUpload($request);
+        } else {
+            // Nếu không có hình ảnh mới, sử dụng hình ảnh cũ của danh mục
+            $data['image'] = $category->image;
+        }
+    
+        // Cập nhật danh mục với dữ liệu mới
+        if ($category->update($data)) {
             Session::flash('message', 'successfully!');
-        else
+        } else {
             Session::flash('message', 'Failure!');
+        }
+    
+        // Chuyển hướng về trang danh sách danh mục sau khi cập nhật
         return redirect()->route('category.index');
     }
+    
     public function destroy(Category $Category)
     {
         if($Category->delete())
