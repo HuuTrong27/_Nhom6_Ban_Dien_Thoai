@@ -24,5 +24,12 @@ class UsersSeeder extends Seeder
             'level' => 0,
             'trangthai' => 'active',
         ]);
+        User::create([
+            'name' => 'VanLoi',
+            'email' => 'tranvanloi@gmail.com',
+            'password' => Hash::make('19072004'),
+            'level' => 1, // Giả sử level 1 là người dùng thông thường, bạn có thể thay đổi theo yêu cầu
+            'trangthai' => 'active',
+        ]);
     }
 }
